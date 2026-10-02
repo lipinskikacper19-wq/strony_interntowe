@@ -1,0 +1,2119 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aqua Świat PRO MAX 🐠</title>
+
+<style>
+
+/* =========================================================
+   AQUA ŚWIAT PRO MAX
+   Wszystko znajduje się w jednym pliku HTML
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --cyan: #54eaff;
+    --blue: #008cff;
+    --dark: #02131d;
+    --panel: rgba(255,255,255,.07);
+    --border: rgba(255,255,255,.13);
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--dark);
+    color: white;
+    overflow-x: hidden;
+}
+
+/* =========================================================
+   TŁO
+   ========================================================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(0,180,255,.20),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 75%,
+            rgba(0,100,255,.18),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #01121b,
+            #032f43
+        );
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #01141e;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        #00cfff,
+        #006cff
+    );
+
+    border-radius: 20px;
+}
+
+/* =========================================================
+   MENU
+   ========================================================= */
+
+nav {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    padding: 16px 6%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    z-index: 5000;
+
+    background: rgba(0,12,20,.75);
+
+    backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    color: var(--cyan);
+    text-decoration: none;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    text-shadow:
+        0 0 15px rgba(84,234,255,.5);
+}
+
+.menu {
+    display: flex;
+    gap: 25px;
+
+    list-style: none;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+
+    transition: .3s;
+}
+
+.menu a:hover {
+    color: var(--cyan);
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 120px 20px 70px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            rgba(0,20,30,.48),
+            rgba(0,20,30,.75)
+        ),
+        url("https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=2000&q=85");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-content {
+    max-width: 950px;
+    z-index: 5;
+}
+
+.hero h1 {
+    font-size: clamp(48px, 9vw, 105px);
+
+    margin-bottom: 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            white,
+            #54eaff,
+            #00aaff
+        );
+
+    -webkit-background-clip: text;
+
+    color: transparent;
+
+    text-shadow:
+        0 0 40px rgba(0,200,255,.25);
+}
+
+.hero p {
+    font-size: 20px;
+
+    line-height: 1.7;
+
+    color: #d8f7ff;
+
+    margin-bottom: 35px;
+}
+
+.hero-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+}
+
+.button {
+    display: inline-block;
+
+    padding: 15px 30px;
+
+    border-radius: 50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00d9ff,
+            #006dff
+        );
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 0 30px rgba(0,200,255,.35);
+
+    transition: .3s;
+}
+
+.button:hover {
+    transform:
+        translateY(-5px)
+        scale(1.04);
+
+    box-shadow:
+        0 0 45px rgba(0,200,255,.65);
+}
+
+.button.secondary {
+    background: rgba(255,255,255,.08);
+
+    border:
+        1px solid rgba(255,255,255,.2);
+
+    backdrop-filter: blur(10px);
+}
+
+/* =========================================================
+   BĄBELKI
+   ========================================================= */
+
+.bubbles {
+    position: absolute;
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+}
+
+.bubble {
+    position: absolute;
+
+    bottom: -100px;
+
+    border-radius: 50%;
+
+    border:
+        2px solid rgba(255,255,255,.35);
+
+    background:
+        rgba(255,255,255,.04);
+
+    box-shadow:
+        inset 3px 3px 5px rgba(255,255,255,.12);
+
+    animation:
+        rise linear infinite;
+}
+
+@keyframes rise {
+
+    0% {
+        transform:
+            translateY(0)
+            translateX(0);
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    50% {
+        transform:
+            translateY(-60vh)
+            translateX(25px);
+    }
+
+    100% {
+        transform:
+            translateY(-120vh)
+            translateX(-25px);
+
+        opacity: 0;
+    }
+}
+
+/* =========================================================
+   ŚWIATŁO POD WODĄ
+   ========================================================= */
+
+.light-ray {
+    position: absolute;
+
+    top: -100px;
+
+    width: 100px;
+    height: 800px;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(95,235,255,.12),
+            transparent
+        );
+
+    transform:
+        rotate(18deg);
+
+    filter: blur(15px);
+
+    animation:
+        lightMove 7s ease-in-out infinite alternate;
+}
+
+.light-ray:nth-child(2) {
+    left: 25%;
+    animation-delay: 2s;
+}
+
+.light-ray:nth-child(3) {
+    right: 20%;
+    animation-delay: 4s;
+}
+
+@keyframes lightMove {
+
+    from {
+        transform:
+            translateX(-100px)
+            rotate(18deg);
+    }
+
+    to {
+        transform:
+            translateX(150px)
+            rotate(18deg);
+    }
+}
+
+/* =========================================================
+   SEKCJE
+   ========================================================= */
+
+section {
+    padding: 110px 6%;
+}
+
+.section-title {
+    text-align: center;
+
+    margin-bottom: 55px;
+}
+
+.section-title h2 {
+    font-size: clamp(32px, 5vw, 48px);
+
+    color: var(--cyan);
+
+    margin-bottom: 12px;
+
+    text-shadow:
+        0 0 25px rgba(84,234,255,.2);
+}
+
+.section-title p {
+    color: #b9dce5;
+}
+
+/* =========================================================
+   AKWARIUM
+   ========================================================= */
+
+.big-aquarium {
+    width: min(1200px, 100%);
+
+    height: 600px;
+
+    margin: auto;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border:
+        7px solid rgba(180,245,255,.75);
+
+    border-radius: 35px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #058eaf,
+            #045a75 45%,
+            #022f43 100%
+        );
+
+    box-shadow:
+        0 0 80px rgba(0,200,255,.25),
+        inset 0 0 80px rgba(0,0,0,.35);
+}
+
+/* woda */
+
+.water-shine {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        repeating-linear-gradient(
+            100deg,
+            transparent 0 80px,
+            rgba(255,255,255,.035) 90px 110px
+        );
+
+    animation:
+        waterMove 8s linear infinite;
+}
+
+@keyframes waterMove {
+
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(180px);
+    }
+}
+
+/* piasek */
+
+.sand {
+    position: absolute;
+
+    bottom: 0;
+
+    left: 0;
+
+    width: 100%;
+    height: 75px;
+
+    background:
+        linear-gradient(
+            #c9aa6c,
+            #8c7140
+        );
+}
+
+/* kamienie */
+
+.rock {
+    position: absolute;
+
+    bottom: 50px;
+
+    width: 90px;
+    height: 55px;
+
+    border-radius:
+        50% 50% 40% 40%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #6e7777,
+            #303a3c
+        );
+}
+
+.rock.r1 {
+    left: 10%;
+}
+
+.rock.r2 {
+    left: 42%;
+    width: 130px;
+}
+
+.rock.r3 {
+    right: 10%;
+}
+
+/* rośliny */
+
+.plant {
+    position: absolute;
+
+    bottom: 50px;
+
+    width: 13px;
+
+    background:
+        linear-gradient(
+            #0c6d43,
+            #2fbd6e
+        );
+
+    border-radius: 100%;
+
+    transform-origin: bottom;
+
+    animation:
+        plantMove 3s ease-in-out infinite alternate;
+}
+
+.plant::before,
+.plant::after {
+    content: "";
+
+    position: absolute;
+
+    width: 55px;
+    height: 13px;
+
+    border-radius: 100%;
+
+    background: #25a65c;
+}
+
+.plant::before {
+    top: 40px;
+    left: -40px;
+
+    transform: rotate(-30deg);
+}
+
+.plant::after {
+    top: 85px;
+    left: -15px;
+
+    transform: rotate(25deg);
+}
+
+@keyframes plantMove {
+
+    from {
+        transform: rotate(-4deg);
+    }
+
+    to {
+        transform: rotate(5deg);
+    }
+}
+
+/* =========================================================
+   RYBKI W AKWARIUM
+   ========================================================= */
+
+.aqua-fish {
+    position: absolute;
+
+    font-size: 55px;
+
+    z-index: 20;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    filter:
+        drop-shadow(
+            0 0 10px rgba(0,0,0,.3)
+        );
+
+    animation:
+        fishSwim 15s linear infinite;
+}
+
+.aqua-fish:hover {
+    filter:
+        drop-shadow(
+            0 0 20px white
+        );
+
+    transform: scale(1.2);
+}
+
+.fish-a {
+    top: 130px;
+    left: -100px;
+}
+
+.fish-b {
+    top: 280px;
+    left: -100px;
+
+    animation-duration: 19s;
+    animation-delay: 2s;
+}
+
+.fish-c {
+    top: 190px;
+    left: -100px;
+
+    animation-duration: 23s;
+    animation-delay: 4s;
+}
+
+.fish-d {
+    top: 360px;
+    left: -100px;
+
+    animation-duration: 17s;
+    animation-delay: 6s;
+}
+
+@keyframes fishSwim {
+
+    0% {
+        transform:
+            translateX(-150px)
+            scaleX(1);
+    }
+
+    45% {
+        transform:
+            translateX(1200px)
+            scaleX(1);
+    }
+
+    50% {
+        transform:
+            translateX(1200px)
+            scaleX(-1);
+    }
+
+    95% {
+        transform:
+            translateX(-150px)
+            scaleX(-1);
+    }
+
+    100% {
+        transform:
+            translateX(-150px)
+            scaleX(1);
+    }
+}
+
+/* =========================================================
+   PANEL INFORMACYJNY
+   ========================================================= */
+
+.aquarium-info {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(180px, 1fr));
+
+    gap: 18px;
+
+    max-width: 1100px;
+
+    margin: 25px auto 0;
+}
+
+.info-box {
+    padding: 20px;
+
+    text-align: center;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    border:
+        1px solid var(--border);
+}
+
+.info-box strong {
+    display: block;
+
+    font-size: 28px;
+
+    color: var(--cyan);
+
+    margin-bottom: 5px;
+}
+
+/* =========================================================
+   KARTY
+   ========================================================= */
+
+.cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
+
+    gap: 25px;
+
+    max-width: 1200px;
+
+    margin: auto;
+}
+
+.card {
+    overflow: hidden;
+
+    border-radius: 24px;
+
+    background:
+        rgba(255,255,255,.065);
+
+    border:
+        1px solid var(--border);
+
+    backdrop-filter: blur(12px);
+
+    transition:
+        transform .35s,
+        box-shadow .35s;
+}
+
+.card:hover {
+    transform:
+        translateY(-10px);
+
+    box-shadow:
+        0 25px 50px rgba(0,0,0,.35),
+        0 0 25px rgba(0,200,255,.1);
+}
+
+.card img {
+    width: 100%;
+    height: 230px;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: .5s;
+}
+
+.card:hover img {
+    transform: scale(1.08);
+}
+
+.card-content {
+    padding: 25px;
+}
+
+.card h3 {
+    color: var(--cyan);
+
+    margin-bottom: 12px;
+
+    font-size: 23px;
+}
+
+.card p {
+    color: #c6e5eb;
+
+    line-height: 1.65;
+}
+
+/* =========================================================
+   PARAMETRY
+   ========================================================= */
+
+.parameters {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(170px, 1fr));
+
+    gap: 20px;
+}
+
+.parameter {
+    padding: 30px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    border:
+        1px solid var(--border);
+}
+
+.parameter strong {
+    display: block;
+
+    font-size: 32px;
+
+    color: var(--cyan);
+
+    margin-bottom: 8px;
+}
+
+.parameter span {
+    color: #b9dce3;
+}
+
+/* =========================================================
+   GALERIA
+   ========================================================= */
+
+.gallery {
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
+
+    gap: 20px;
+}
+
+.gallery-item {
+    height: 270px;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    cursor: pointer;
+
+    border:
+        1px solid var(--border);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: .5s;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.12);
+}
+
+/* =========================================================
+   MINI GRA
+   ========================================================= */
+
+.game {
+    max-width: 1000px;
+
+    margin: auto;
+
+    padding: 35px;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,150,255,.12),
+            rgba(0,0,0,.15)
+        );
+
+    border:
+        1px solid var(--border);
+
+    text-align: center;
+}
+
+.game h3 {
+    color: var(--cyan);
+
+    font-size: 30px;
+
+    margin-bottom: 12px;
+}
+
+.game p {
+    color: #c5e5eb;
+
+    margin-bottom: 20px;
+}
+
+.game-stats {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 30px;
+
+    margin-bottom: 25px;
+
+    flex-wrap: wrap;
+}
+
+.game-stat {
+    font-size: 20px;
+}
+
+.game-stat strong {
+    color: var(--cyan);
+}
+
+.food {
+    position: absolute;
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    z-index: 100;
+
+    animation:
+        foodFall 3s linear forwards;
+}
+
+@keyframes foodFall {
+
+    from {
+        top: -40px;
+    }
+
+    to {
+        top: 100%;
+    }
+}
+
+/* =========================================================
+   LIGHTBOX
+   ========================================================= */
+
+#lightbox {
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px;
+
+    background:
+        rgba(0,0,0,.92);
+
+    z-index: 9000;
+}
+
+#lightbox img {
+    max-width: 95%;
+    max-height: 90vh;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 0 70px rgba(0,200,255,.4);
+}
+
+#closeLightbox {
+    position: absolute;
+
+    top: 20px;
+    right: 30px;
+
+    font-size: 50px;
+
+    cursor: pointer;
+
+    color: white;
+}
+
+/* =========================================================
+   STOPKA
+   ========================================================= */
+
+footer {
+    padding: 50px 20px;
+
+    text-align: center;
+
+    background:
+        rgba(0,0,0,.3);
+
+    color: #8dbbc5;
+}
+
+footer strong {
+    color: var(--cyan);
+}
+
+/* =========================================================
+   GÓRA
+   ========================================================= */
+
+#topButton {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    width: 55px;
+    height: 55px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00d5ff,
+            #006cff
+        );
+
+    color: white;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: .3s;
+
+    z-index: 4000;
+
+    box-shadow:
+        0 0 25px rgba(0,200,255,.4);
+}
+
+#topButton.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* =========================================================
+   TRYB NOCNY
+   ========================================================= */
+
+body.night {
+    --cyan: #7e9cff;
+
+    background:
+        #000811;
+}
+
+body.night .hero {
+    filter:
+        brightness(.7)
+        saturate(.8);
+}
+
+/* =========================================================
+   RESPONSYWNOŚĆ
+   ========================================================= */
+
+@media(max-width: 750px) {
+
+    nav {
+        padding: 15px 5%;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    section {
+        padding: 80px 5%;
+    }
+
+    .big-aquarium {
+        height: 430px;
+    }
+
+    .hero p {
+        font-size: 17px;
+    }
+
+    .aqua-fish {
+        font-size: 40px;
+    }
+
+    .gallery-item {
+        height: 220px;
+    }
+
+    .tip {
+        flex-direction: column;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     MENU
+     ===================================================== -->
+
+<nav>
+
+    <a href="#start" class="logo">
+        🐠 Aqua Świat PRO
+    </a>
+
+    <ul class="menu">
+
+        <li>
+            <a href="#akwarium">Akwarium</a>
+        </li>
+
+        <li>
+            <a href="#rybki">Rybki</a>
+        </li>
+
+        <li>
+            <a href="#rosliny">Rośliny</a>
+        </li>
+
+        <li>
+            <a href="#woda">Woda</a>
+        </li>
+
+        <li>
+            <a href="#gra">Gra</a>
+        </li>
+
+        <li>
+            <a href="#galeria">Galeria</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+<!-- =====================================================
+     HERO
+     ===================================================== -->
+
+<header class="hero" id="start">
+
+    <div class="light-ray"></div>
+    <div class="light-ray"></div>
+    <div class="light-ray"></div>
+
+    <div
+        class="bubbles"
+        id="heroBubbles">
+    </div>
+
+    <div class="hero-content">
+
+        <h1>
+            🐠 Aqua Świat
+        </h1>
+
+        <p>
+            Wejdź do niezwykłego podwodnego świata.
+            Odkrywaj ryby, rośliny, parametry wody
+            i baw się własnym akwarium.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a
+                href="#akwarium"
+                class="button">
+                🌊 Zanurz się
+            </a>
+
+            <a
+                href="#gra"
+                class="button secondary">
+                🎮 Nakarm rybki
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     AKWARIUM
+     ===================================================== -->
+
+<section id="akwarium">
+
+    <div class="section-title">
+
+        <h2>
+            🌊 Twoje akwarium
+        </h2>
+
+        <p>
+            Żywy podwodny świat z animowanymi rybkami.
+        </p>
+
+    </div>
+
+
+    <div class="big-aquarium">
+
+        <div class="water-shine"></div>
+
+        <div class="bubbles" id="tankBubbles"></div>
+
+
+        <!-- RYBY -->
+
+        <div
+            class="aqua-fish fish-a"
+            onclick="fishClicked('Gupik')">
+            🐠
+        </div>
+
+        <div
+            class="aqua-fish fish-b"
+            onclick="fishClicked('Neon')">
+            🐟
+        </div>
+
+        <div
+            class="aqua-fish fish-c"
+            onclick="fishClicked('Błazenek')">
+            🐡
+        </div>
+
+        <div
+            class="aqua-fish fish-d"
+            onclick="fishClicked('Ryba tropikalna')">
+            🐠
+        </div>
+
+
+        <!-- ROŚLINY -->
+
+        <div
+            class="plant"
+            style="
+                left: 10%;
+                height: 180px;
+            ">
+        </div>
+
+        <div
+            class="plant"
+            style="
+                left: 20%;
+                height: 130px;
+            ">
+        </div>
+
+        <div
+            class="plant"
+            style="
+                left: 70%;
+                height: 170px;
+            ">
+        </div>
+
+        <div
+            class="plant"
+            style="
+                right: 10%;
+                height: 120px;
+            ">
+        </div>
+
+
+        <!-- KAMIENIE -->
+
+        <div class="rock r1"></div>
+        <div class="rock r2"></div>
+        <div class="rock r3"></div>
+
+
+        <!-- PIACH -->
+
+        <div class="sand"></div>
+
+    </div>
+
+
+    <div class="aquarium-info">
+
+        <div class="info-box">
+            <strong>24°C</strong>
+            Temperatura
+        </div>
+
+        <div class="info-box">
+            <strong>pH 7.0</strong>
+            Odczyn
+        </div>
+
+        <div class="info-box">
+            <strong>8</strong>
+            Rybki
+        </div>
+
+        <div class="info-box">
+            <strong>12</strong>
+            Rośliny
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     RYBKI
+     ===================================================== -->
+
+<section id="rybki">
+
+    <div class="section-title">
+
+        <h2>
+            🐟 Mieszkańcy akwarium
+        </h2>
+
+        <p>
+            Kliknij rybkę w akwarium albo poznaj gatunki poniżej.
+        </p>
+
+    </div>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <img
+                src="https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85"
+                alt="Kolorowa rybka">
+
+            <div class="card-content">
+
+                <h3>
+                    🐠 Gupik
+                </h3>
+
+                <p>
+                    Mała, kolorowa rybka słodkowodna.
+                    Występuje w wielu odmianach kolorystycznych.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <img
+                src="https://images.unsplash.com/photo-1535591273668-578e31182c4f?auto=format&fit=crop&w=900&q=85"
+                alt="Ryby">
+
+            <div class="card-content">
+
+                <h3>
+                    🐟 Neon
+                </h3>
+
+                <p>
+                    Niewielka rybka stadna z charakterystycznym
+                    jasnym pasem na ciele.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <img
+                src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=85"
+                alt="Podwodny świat">
+
+            <div class="card-content">
+
+                <h3>
+                    🐡 Rybka tropikalna
+                </h3>
+
+                <p>
+                    Kolorowi mieszkańcy akwarium mogą stworzyć
+                    niesamowity podwodny krajobraz.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ROŚLINY
+     ===================================================== -->
+
+<section id="rosliny">
+
+    <div class="section-title">
+
+        <h2>
+            🌿 Podwodna roślinność
+        </h2>
+
+        <p>
+            Zielone rośliny nadają akwarium naturalnego charakteru.
+        </p>
+
+    </div>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <img
+                src="https://images.unsplash.com/photo-1530053969600-caed2596d242?auto=format&fit=crop&w=900&q=85"
+                alt="Rośliny wodne">
+
+            <div class="card-content">
+
+                <h3>
+                    🌿 Rośliny
+                </h3>
+
+                <p>
+                    Tworzą kryjówki i pomagają budować
+                    naturalny wygląd zbiornika.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <img
+                src="https://images.unsplash.com/photo-1518467166778-b88f373ffec7?auto=format&fit=crop&w=900&q=85"
+                alt="Zielone rośliny">
+
+            <div class="card-content">
+
+                <h3>
+                    🌱 Gęsta roślinność
+                </h3>
+
+                <p>
+                    Odpowiednio dobrane rośliny mogą stworzyć
+                    prawdziwą podwodną dżunglę.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <img
+                src="https://images.unsplash.com/photo-1546026423-cc4642628d2b?auto=format&fit=crop&w=900&q=85"
+                alt="Podwodna roślinność">
+
+            <div class="card-content">
+
+                <h3>
+                    🌾 Trawnik
+                </h3>
+
+                <p>
+                    Niskie rośliny mogą tworzyć zielony dywan
+                    na dnie akwarium.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     WODA
+     ===================================================== -->
+
+<section id="woda">
+
+    <div class="section-title">
+
+        <h2>
+            💧 Centrum parametrów
+        </h2>
+
+        <p>
+            Przykładowe parametry akwarium słodkowodnego.
+        </p>
+
+    </div>
+
+
+    <div class="parameters">
+
+        <div class="parameter">
+            <strong>24°C</strong>
+            Temperatura
+        </div>
+
+        <div class="parameter">
+            <strong>7.0</strong>
+            pH
+        </div>
+
+        <div class="parameter">
+            <strong>8</strong>
+            GH
+        </div>
+
+        <div class="parameter">
+            <strong>5</strong>
+            KH
+        </div>
+
+        <div class="parameter">
+            <strong>0</strong>
+            NO₂
+        </div>
+
+        <div class="parameter">
+            <strong>&lt;20</strong>
+            NO₃ ppm
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     GRA
+     ===================================================== -->
+
+<section id="gra">
+
+    <div class="section-title">
+
+        <h2>
+            🎮 Nakarm rybki
+        </h2>
+
+        <p>
+            Kliknij przycisk i nakarm rybki!
+        </p>
+
+    </div>
+
+
+    <div class="game">
+
+        <h3>
+            🍽️ Karmienie akwarium
+        </h3>
+
+        <p>
+            Każde kliknięcie wrzuca porcję pokarmu.
+            Spróbuj zdobyć jak najwięcej punktów!
+        </p>
+
+
+        <div class="game-stats">
+
+            <div class="game-stat">
+                Wynik:
+                <strong id="score">
+                    0
+                </strong>
+            </div>
+
+            <div class="game-stat">
+                Nakarmione:
+                <strong id="fed">
+                    0
+                </strong>
+            </div>
+
+        </div>
+
+
+        <button
+            class="button"
+            onclick="feedFish()">
+
+            🐟 Nakarm rybki
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     GALERIA
+     ===================================================== -->
+
+<section id="galeria">
+
+    <div class="section-title">
+
+        <h2>
+            📸 Galeria
+        </h2>
+
+        <p>
+            Kliknij zdjęcie, aby zobaczyć je w pełnym rozmiarze.
+        </p>
+
+    </div>
+
+
+    <div class="gallery">
+
+        <div class="gallery-item">
+
+            <img
+                src="https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=1200&q=85"
+                alt="Akwarium">
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <img
+                src="https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=1200&q=85"
+                alt="Rybka">
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <img
+                src="https://images.unsplash.com/photo-1535591273668-578e31182c4f?auto=format&fit=crop&w=1200&q=85"
+                alt="Ryby">
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <img
+                src="https://images.unsplash.com/photo-1530053969600-caed2596d242?auto=format&fit=crop&w=1200&q=85"
+                alt="Rośliny">
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <img
+                src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85"
+                alt="Podwodny świat">
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <img
+                src="https://images.unsplash.com/photo-1544550285-f813152fb2fd?auto=format&fit=crop&w=1200&q=85"
+                alt="Akwarium">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     LIGHTBOX
+     ===================================================== -->
+
+<div id="lightbox">
+
+    <span id="closeLightbox">
+        ×
+    </span>
+
+    <img
+        id="lightboxImage"
+        src=""
+        alt="Powiększone zdjęcie">
+
+</div>
+
+
+<!-- =====================================================
+     STOPKA
+     ===================================================== -->
+
+<footer>
+
+    <p>
+        🐠
+        <strong>
+            Aqua Świat PRO MAX
+        </strong>
+    </p>
+
+    <p style="margin-top:10px;">
+        Twój własny podwodny świat 🌊
+    </p>
+
+    <p style="margin-top:15px;">
+        ©
+        <span id="year"></span>
+        Aqua Świat
+    </p>
+
+</footer>
+
+
+<!-- =====================================================
+     PRZYCISK GÓRA
+     ===================================================== -->
+
+<button id="topButton">
+    ↑
+</button>
+
+
+<script>
+
+/* =========================================================
+   BĄBELKI
+   ========================================================= */
+
+function createBubbles(container, amount) {
+
+    for (let i = 0; i < amount; i++) {
+
+        const bubble =
+            document.createElement("div");
+
+        bubble.className =
+            "bubble";
+
+        const size =
+            Math.random() * 20 + 5;
+
+        bubble.style.width =
+            size + "px";
+
+        bubble.style.height =
+            size + "px";
+
+        bubble.style.left =
+            Math.random() * 100 + "%";
+
+        bubble.style.animationDuration =
+            Math.random() * 9 + 5 + "s";
+
+        bubble.style.animationDelay =
+            Math.random() * 8 + "s";
+
+        container.appendChild(bubble);
+    }
+}
+
+createBubbles(
+    document.getElementById("heroBubbles"),
+    45
+);
+
+createBubbles(
+    document.getElementById("tankBubbles"),
+    25
+);
+
+
+/* =========================================================
+   ROK
+   ========================================================= */
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+
+/* =========================================================
+   LIGHTBOX
+   ========================================================= */
+
+const galleryImages =
+    document.querySelectorAll(".gallery-item img");
+
+const lightbox =
+    document.getElementById("lightbox");
+
+const lightboxImage =
+    document.getElementById("lightboxImage");
+
+const closeLightbox =
+    document.getElementById("closeLightbox");
+
+
+galleryImages.forEach(image => {
+
+    image.addEventListener("click", () => {
+
+        lightbox.style.display =
+            "flex";
+
+        lightboxImage.src =
+            image.src;
+
+    });
+
+});
+
+
+closeLightbox.addEventListener(
+    "click",
+    () => {
+
+        lightbox.style.display =
+            "none";
+
+    }
+);
+
+
+lightbox.addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target === lightbox
+        ) {
+
+            lightbox.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INFORMACJA O RYBCE
+   ========================================================= */
+
+function fishClicked(name) {
+
+    alert(
+        "🐟 Kliknąłeś rybkę!\n\n" +
+        "Gatunek: " +
+        name +
+        "\n\n" +
+        "Ta rybka pływa sobie po Aqua Świat!"
+    );
+
+}
+
+
+/* =========================================================
+   GRA - KARMIENIE
+   ========================================================= */
+
+let score = 0;
+
+let fed = 0;
+
+
+function feedFish() {
+
+    score +=
+        Math.floor(
+            Math.random() * 10
+        ) + 1;
+
+    fed++;
+
+
+    document.getElementById(
+        "score"
+    ).textContent = score;
+
+
+    document.getElementById(
+        "fed"
+    ).textContent = fed;
+
+
+    const food =
+        document.createElement("div");
+
+    food.className =
+        "food";
+
+    food.textContent =
+        "🍤";
+
+
+    food.style.left =
+        Math.random() * 90 + "%";
+
+
+    const aquarium =
+        document.querySelector(
+            ".big-aquarium"
+        );
+
+
+    aquarium.appendChild(food);
+
+
+    setTimeout(() => {
+
+        food.remove();
+
+    }, 3000);
+
+}
+
+
+/* =========================================================
+   PRZYCISK GÓRA
+   ========================================================= */
+
+const topButton =
+    document.getElementById(
+        "topButton"
+    );
+
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        if (
+            window.scrollY > 500
+        ) {
+
+            topButton.classList.add(
+                "show"
+            );
+
+        } else {
+
+            topButton.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+topButton.addEventListener(
+    "click",
+    () => {
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
+    }
+);
+
+
+/* =========================================================
+   ANIMOWANE KARTY
+   ========================================================= */
+
+const cards =
+    document.querySelectorAll(
+        ".card"
+    );
+
+
+const observer =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target.style.opacity =
+                            "1";
+
+                        entry.target.style.transform =
+                            "translateY(0)";
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold: .12
+        }
+    );
+
+
+cards.forEach(card => {
+
+    card.style.opacity =
+        "0";
+
+    card.style.transform =
+        "translateY(40px)";
+
+    card.style.transition =
+        "opacity .7s ease, transform .7s ease";
+
+    observer.observe(card);
+
+});
+
+
+/* =========================================================
+   KLAWISZ ESC ZAMYKA GALERIĘ
+   ========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            lightbox.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>

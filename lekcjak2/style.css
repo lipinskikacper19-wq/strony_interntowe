@@ -1,0 +1,95 @@
+#naglowek{
+    background-color: #403f3fa9;
+    padding: 20px;
+    text-align: center;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 2px;
+    
+}
+#baner{
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPA42z6oUT8kJhFGYRSioRYx6GodALyRPvJFPJJd8LxQ&s=10');
+    background-size: cover;
+    background-position: center;   
+    padding: 100px;
+    text-align: center;
+    padding: 60px 20px;   
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 2px;
+}
+#baner h2{
+    font-size: 50px;
+    margin: 0;
+    font-weight: bold;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    word-wrap: break-word;  
+}
+#baner p{
+    font-size: 20px;
+    margin: 10px 0 0;
+    font-weight: bold;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    word-wrap: break-word;
+
+}
+#baner p{
+    font-size: 20px;
+    margin: 10px 0 0;
+    font-weight: bold;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    word-wrap: break-word;
+
+}
+
+#tresc{
+  width: 100%;
+  background-color: #f2f2f2;
+  padding: 20px 0;
+  min-height: 100px;
+}
+
+.wpis{
+  width: 80%;
+  margin:15px auto;
+  background-color: #ffffff;  
+  border-radius: 8px;
+  padding: 15px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: "Helvetica",Aral,sans-serif;
+
+}
+
+.wpis .autor{
+    font-size: 16px;
+    font-weight: bold;
+    color: #1a1a2e;
+    margin-bottom: 2px;
+}
+
+.wpis .data{
+    font-size: 12px;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+}
+.wpis.tekst{
+    font-size:15px;
+    color: #2c3e50;
+    line-height:1.6px;
+    margin-bottom:12px;
+}
+
+.wpis.rakcje{
+    border-top:1px solid #e0e0e0;
+    padding-top: 10px;
+    color: #3498db;
+    font-size:14px;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
